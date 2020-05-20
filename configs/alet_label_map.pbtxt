@@ -1,0 +1,245 @@
+item
+{
+id :1
+name :'Anvil'
+}
+item
+{
+id :2
+name :'Aviation_Snip'
+}
+item
+{
+id :3
+name :'Bench_Vise'
+}
+item
+{
+id :4
+name :'Brush'
+}
+item
+{
+id :5
+name :'Caliper'
+}
+item
+{
+id :6
+name :'Caulk_Gun'
+}
+item
+{
+id :7
+name :'Chisel'
+}
+item
+{
+id :8
+name :'Clamp'
+}
+item
+{
+id :9
+name :'Drill'
+}
+item
+{
+id :10
+name :'File'
+}
+item
+{
+id :11
+name :'Flashlight'
+}
+item
+{
+id :12
+name :'Gloves'
+}
+item
+{
+id :13
+name :'Grinder'
+}
+item
+{
+id :14
+name :'Hammer'
+}
+item
+{
+id :15
+name :'Hex_Key'
+}
+item
+{
+id :16
+name :'Hole_Punch'
+}
+item
+{
+id :17
+name :'Knife'
+}
+item
+{
+id :18
+name :'Level'
+}
+item
+{
+id :19
+name :'Mallet'
+}
+item
+{
+id :20
+name :'Marker'
+}
+item
+{
+id :21
+name :'Meter'
+}
+item
+{
+id :22
+name :'Pen'
+}
+item
+{
+id :23
+name :'Pencil'
+}
+item
+{
+id :24
+name :'Pencil_Sharpener'
+}
+item
+{
+id :25
+name :'Plane'
+}
+item
+{
+id :26
+name :'Pliers'
+}
+item
+{
+id :27
+name :'Putty_Knife'
+}
+item
+{
+id :28
+name :'Rake'
+}
+item
+{
+id :29
+name :'Ratchet'
+}
+item
+{
+id :30
+name :'Riveter'
+}
+item
+{
+id :31
+name :'Safety_Glass'
+}
+item
+{
+id :32
+name :'Safety_Helmet'
+}
+item
+{
+id :33
+name :'Safety_Mask'
+}
+item
+{
+id :34
+name :'Safety_Headphones'
+}
+item
+{
+id :35
+name :'Saw'
+}
+item
+{
+id :36
+name :'Scissors'
+}
+item
+{
+id :37
+name :'Screwdriver'
+}
+item
+{
+id :38
+name :'Soldering_Iron'
+}
+item
+{
+id :39
+name :'Spade'
+}
+item
+{
+id :40
+name :'Square'
+}
+item
+{
+id :41
+name :'Staple_Gun'
+}
+item
+{
+id :42
+name :'Stapler'
+}
+item
+{
+id :43
+name :'Tape'
+}
+item
+{
+id :44
+name :'Tape_Dispenser'
+}
+item
+{
+id :45
+name :'Trowel'
+}
+item
+{
+id :46
+name :'Wrench'
+}
+item
+{
+id :47
+name :'Ruler'
+}
+item
+{
+id :48
+name :'Crowbar'
+}
+item
+{
+id :49
+name :'Axe'
+}

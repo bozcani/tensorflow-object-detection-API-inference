@@ -1,0 +1,1 @@
+This folder contains sample images and videos but I ignore it on Github due to large size.

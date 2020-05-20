@@ -1,0 +1,16 @@
+__pycache__
+*.pyc
+
+# Ignore models due to large size.
+/models/*
+!/models/README.md
+
+# Ignore sample images and videos due to large size.
+/samples/*
+# But keep some of them for testing.
+!/samples/2700.jpg
+!/samples/3720.jpg
+!/samples/5100.jpg
+!/samples/5550.jpg
+!/samples/6660.jpg
+!/samples/README.md
