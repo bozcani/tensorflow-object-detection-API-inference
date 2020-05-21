@@ -9,8 +9,8 @@ param['num_classes'] = 80
 param['categories'] = "COCO"
 #param['model_name'] = "faster_rcnn_resnet101_coco_2018_01_28"
 #param['model_name'] = "faster_rcnn_nas_coco_2018_01_28"
-param['model_name'] = "ssd_mobilenet_v1_coco_2018_01_28"
-#param['model_name'] = "mask_rcnn_inception_resnet_v2_atrous_coco_2018_01_28"
+#param['model_name'] = "ssd_mobilenet_v1_coco_2018_01_28"
+param['model_name'] = "mask_rcnn_inception_resnet_v2_atrous_coco_2018_01_28"
 #param['model_name']='alet'
 #"mask_rcnn_resnet101_atrous_coco_2018_01_28"
 
@@ -32,11 +32,9 @@ def main(args):
     
     img = cv2.imread("samples/6660.jpg")
 
-    objects=obj.run_on_image(img, display=True, show_mask=False)
+    objects=obj.run_on_image(img, display=False, show_mask=True)
 
     cv2.imwrite("res.jpg", img) 
-
-    print(objects)
 
 
 if __name__=='__main__':
