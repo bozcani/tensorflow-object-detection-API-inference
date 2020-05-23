@@ -15,7 +15,7 @@ param['categories'] = "COCO"
 #param['model_name'] = "ssd_mobilenet_v1_coco_2018_01_28"
 #param['model_name'] = "mask_rcnn_inception_resnet_v2_atrous_coco_2018_01_28"
 #param['model_name'] = "alet_checkpoint"
-param['model_name'] = "alet_faster_rcnn_resnet101_coco_checkpoint_67098"
+param['model_name'] = "alet_faster_rcnn_resnet101_coco_checkpoint_37206"
 
 #param['model_name']='alet'
 #"mask_rcnn_resnet101_atrous_coco_2018_01_28"
@@ -37,7 +37,7 @@ def main(args):
     #                                display=True,
     #                                write_annotations=True)
     
-    img = cv2.imread("samples/6900.jpg")
+    img = cv2.imread("samples/img1.jpeg")
 
     objects=obj.run_on_image(img, display=False, show_mask=False)
 
