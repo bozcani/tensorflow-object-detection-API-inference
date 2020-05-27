@@ -223,7 +223,11 @@ class Detector:
                     cv2.imshow("img", image)
                     cv2.waitKey(0)
 
-                return objects
+                output_names = [self.category_index[c]['name'] for c in output_dict['detection_classes'][:output_dict['num_detections']]]
+                return (output_dict['detection_classes'][:output_dict['num_detections']], 
+                            output_dict['detection_scores'][:output_dict['num_detections']], 
+                            output_dict['detection_boxes'][:output_dict['num_detections']],
+                            output_names)
 
 
 
