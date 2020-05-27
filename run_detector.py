@@ -5,7 +5,7 @@ import numpy as np
 
 # Detection
 param = {}
-param['num_classes'] = 80
+param['num_classes'] = 90
 #param['num_classes'] = 49
 
 
@@ -39,16 +39,21 @@ def main(args):
     
     img = cv2.imread("samples/2700.jpg")
 
+    """
     a,b,c,d=obj.run_on_image(img, display=False, show_mask=False)
-
     cv2.imwrite("res.jpg", img) 
-
     print(a)
     print(b)
     print(c)
     print(d)
+    """
 
+    results = obj.run_on_image_folder(path_to_folder="samples/sample_folder",
+                                        save_dir="./",
+                                        display=False,
+                                        show_mask=False)
 
+    print(results)
 
 if __name__=='__main__':
     main(sys.argv)
