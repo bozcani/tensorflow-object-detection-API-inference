@@ -223,7 +223,10 @@ class Detector:
                     cv2.imshow("img", image)
                     cv2.waitKey(0)
 
-                output_names = [self.category_index[c]['name'] for c in output_dict['detection_classes'][:output_dict['num_detections']]]
+                print(output_dict['detection_classes'])
+
+                #output_names = [self.category_index[c]['name'] for c in output_dict['detection_classes'][:output_dict['num_detections']]]
+                output_names = []
                 return (output_dict['detection_classes'][:output_dict['num_detections']], 
                             output_dict['detection_scores'][:output_dict['num_detections']], 
                             output_dict['detection_boxes'][:output_dict['num_detections']],
@@ -301,7 +304,7 @@ class Detector:
                         output_dict['detection_scores'],
                         self.category_index,
                         instance_masks=instance_masks,
-                        min_score_thresh=0.1,
+                        min_score_thresh=0.5,
                         use_normalized_coordinates=True,
                         line_thickness=8)
 
@@ -315,11 +318,10 @@ class Detector:
                         print(save_name)   
                         cv2.imwrite(os.path.join(save_dir, save_name), image)
 
-                    output_names = [self.category_index[c]['name'] for c in output_dict['detection_classes'][:output_dict['num_detections']]]
+                    #output_names = [self.category_index[c]['name'] for c in output_dict['detection_classes'][:output_dict['num_detections']]]
                     res = (fname, output_dict['detection_classes'][:output_dict['num_detections']], 
                                 output_dict['detection_scores'][:output_dict['num_detections']], 
-                                output_dict['detection_boxes'][:output_dict['num_detections']],
-                                output_names)
+                                output_dict['detection_boxes'][:output_dict['num_detections']])
 
                     results.append(res)
                 return results    
