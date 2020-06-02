@@ -5,53 +5,47 @@ def display_predictions(img, predictions, min_score_threshold):
     img = img.copy()
     h,w = img.shape[:2]
 
-    classes, scores, bboxes, names = predictions 
+    bboxes = predictions['bboxes'] 
 
     for i in range(len(bboxes)):
-        if scores[i]>min_score_threshold:
-            x1 = int((bboxes[i][1])*w)
-            y1 = int((bboxes[i][0])*h)
-            x2 = int((bboxes[i][3])*w)
-            y2 = int((bboxes[i][2])*h)
+        if bboxes[i]['score']>min_score_threshold:
+            x1 = int((bboxes[i]['xmin'])*w)
+            y1 = int((bboxes[i]['ymin'])*h)
+            x2 = int((bboxes[i]['xmax'])*w)
+            y2 = int((bboxes[i]['ymax'])*h)
 
-            cv2.putText(img, ":"+str(classes[i]), (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX,  
+            cv2.putText(img, str(bboxes[i]["cat_name"])+":"+str(bboxes[i]["category"]), (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX,  
                     1, (0,0,255), 1, cv2.LINE_AA) 
             cv2.rectangle(img, (x1,y1), (x2,y2), (0,0,255), 1)
 
     return img
 
 def filter_out_predictions(predictions, iou_threshold, min_score_threshold):
-    classes, scores, bboxes, names = predictions 
 
-    filtered_classes = []
-    filtered_scores = []
-    filtered_bboxes = []
-    filtered_names = []
+    bboxes = predictions['bboxes']
 
     eliminated_indices = []
     for i in range(len(bboxes)):
-        ymin_i, xmin_i, ymax_i, xmax_i = bboxes[i]
+        ymin_i, xmin_i, ymax_i, xmax_i = bboxes[i]['ymin'], bboxes[i]['xmin'], bboxes[i]['ymax'], bboxes[i]['xmax']
         for j in range(len(bboxes)):
             if i==j:
                 continue
-            ymin_j, xmin_j, ymax_j, xmax_j = bboxes[j]
+            ymin_j, xmin_j, ymax_j, xmax_j = bboxes[j]['ymin'], bboxes[j]['xmin'], bboxes[j]['ymax'], bboxes[j]['xmax']
             iou = bb_intersection_over_union((xmin_i, ymin_i, xmax_i, ymax_i), ((xmin_j, ymin_j, xmax_j, ymax_j)))
 
             if iou>=iou_threshold:
-                if scores[i]>scores[j]:
+                if bboxes[i]['score']>bboxes[j]['score']:
                     eliminated_indices.append(j)
                 else:
                     eliminated_indices.append(i)
 
+    new_bboxes=[]
     for k in range(len(bboxes)):
         if k not in eliminated_indices:
-            filtered_classes.append(classes[k])
-            filtered_scores.append(scores[k])
-            filtered_bboxes.append(bboxes[k])
-            filtered_names.append(names[k])
+            new_bboxes.append(bboxes[k])
 
-
-    return (filtered_classes, filtered_scores, filtered_bboxes, filtered_names)
+    predictions['bboxes']=new_bboxes
+    return predictions
 
 
 def bb_intersection_over_union(boxA, boxB):
