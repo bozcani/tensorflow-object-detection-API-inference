@@ -27,8 +27,13 @@ def filter_out_predictions(predictions, iou_threshold, min_score_threshold):
     eliminated_indices = []
     for i in range(len(bboxes)):
         ymin_i, xmin_i, ymax_i, xmax_i = bboxes[i]['ymin'], bboxes[i]['xmin'], bboxes[i]['ymax'], bboxes[i]['xmax']
+
+        if bboxes[i]["score"]<min_score_threshold:
+            eliminated_indices.append(i)
+            continue
+
         for j in range(len(bboxes)):
-            if i==j:
+            if i==j or bboxes[j]["score"]<min_score_threshold:
                 continue
             ymin_j, xmin_j, ymax_j, xmax_j = bboxes[j]['ymin'], bboxes[j]['xmin'], bboxes[j]['ymax'], bboxes[j]['xmax']
             iou = bb_intersection_over_union((xmin_i, ymin_i, xmax_i, ymax_i), ((xmin_j, ymin_j, xmax_j, ymax_j)))
@@ -71,3 +76,5 @@ def bb_intersection_over_union(boxA, boxB):
 
     # return the intersection over union value
     return iou                
+
+    

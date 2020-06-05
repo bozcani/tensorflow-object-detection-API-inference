@@ -100,7 +100,7 @@ class Detector:
                 detection_boxes = tf.slice(detection_boxes, [0, 0], [real_num_detection, -1])
                 detection_masks = tf.slice(detection_masks, [0, 0, 0], [real_num_detection, -1, -1])
                 detection_masks_reframed = utils_ops.reframe_box_masks_to_image_masks(
-                    detection_masks, detection_boxes, image.shape[0], image.shape[1])
+                    detection_masks, detection_boxes, 480, 856)
                 detection_masks_reframed = tf.cast(
                     tf.greater(detection_masks_reframed, 0.5), tf.uint8)
                 # Follow the convention by adding back the batch dimension
@@ -247,12 +247,12 @@ class Detector:
         output['bboxes']=[]
         for i in range(output_dict['num_detections']):
             annot = {}
-            annot["category"] = output_dict['detection_classes'][i]
-            annot["score"] = output_dict['detection_scores'][i]
-            annot["xmin"]  = output_dict['detection_boxes'][i][1]
-            annot["ymin"]  = output_dict['detection_boxes'][i][0]
-            annot["xmax"]  = output_dict['detection_boxes'][i][3]
-            annot["ymax"]  = output_dict['detection_boxes'][i][2]
+            annot["category"] = int(output_dict['detection_classes'][i])
+            annot["score"] = float(output_dict['detection_scores'][i])
+            annot["xmin"]  = float(output_dict['detection_boxes'][i][1])
+            annot["ymin"]  = float(output_dict['detection_boxes'][i][0])
+            annot["xmax"]  = float(output_dict['detection_boxes'][i][3])
+            annot["ymax"]  = float(output_dict['detection_boxes'][i][2])
             annot["cat_name"] = output_names[i]
 
             output["bboxes"].append(annot)
@@ -271,10 +271,13 @@ class Detector:
             list: List of detected objects. 
         """
 
-        onlyfiles = [f for f in os.listdir(path_to_folder) if os.path.isfile(os.path.join(path_to_folder, f))]    
-
+        onlyfiles = [f for f in os.listdir(path_to_folder) if os.path.isfile(os.path.join(path_to_folder, f)) and f.split(".")[-1]=="png"]    
+        onlyfiles.sort()
         results = []
+        i=0
         for fname in onlyfiles:
             predictions = self.run_on_image(os.path.join(path_to_folder, fname), display=display, show_mask=show_mask)
             results.append(predictions)
+            print("{}/{}".format(i, len(onlyfiles)))
+            i+=1
         return results    
