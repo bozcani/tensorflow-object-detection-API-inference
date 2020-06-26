@@ -7,17 +7,17 @@ from utils import filter_out_predictions, display_predictions
 
 # Detection
 param = {}
-param['num_classes'] = 90
-#param['num_classes'] = 49
+#param['num_classes'] = 90
+param['num_classes'] = 49
 
 
 param['categories'] = "COCO"
-param['model_name'] = "faster_rcnn_resnet101_coco_2018_01_28"
+#param['model_name'] = "faster_rcnn_resnet101_coco_2018_01_28"
 #param['model_name'] = "faster_rcnn_nas_coco_2018_01_28"
 #param['model_name'] = "ssd_mobilenet_v1_coco_2018_01_28"
 #param['model_name'] = "mask_rcnn_inception_resnet_v2_atrous_coco_2018_01_28"
 #param['model_name'] = "alet_checkpoint"
-#param['model_name'] = "alet_faster_rcnn_resnet101_coco_checkpoint_fixed_181432"
+param['model_name'] = "alet_faster_rcnn_resnet101_coco_checkpoint_fixed_181432"
 
 #param['model_name']='alet'
 #"mask_rcnn_resnet101_atrous_coco_2018_01_28"
@@ -27,8 +27,8 @@ param['model_path'] = os.path.join(param['model_parent'], param['model_name'])
 param['model_zoo_link'] = "http://download.tensorflow.org/models/object_detection/"
 param['model_url'] = os.path.join(param['model_zoo_link'], param['model_name'])
 param['path_to_ckpt'] = os.path.join(param['model_path'], "frozen_inference_graph.pb")
-param['path_to_labels'] = os.path.join('configs', 'mscoco_label_map.pbtxt')
-#param['path_to_labels'] = os.path.join('configs', 'alet_label_map.pbtxt')
+#param['path_to_labels'] = os.path.join('configs', 'mscoco_label_map.pbtxt')
+param['path_to_labels'] = os.path.join('configs', 'alet_label_map.pbtxt')
 
 
 def main(args):
@@ -41,7 +41,7 @@ def main(args):
     """
 
 
-    
+    """
     # -------------------------------
     # ------ Run on single image ----
     # -------------------------------
@@ -58,22 +58,28 @@ def main(args):
     disp = display_predictions(img, filtered_predictions, min_score_threshold=0.05)
     cv2.imwrite("res_filterd.jpg", disp) 
     # -------------------------------
-    
-
     """
+
+    
     # -------------------------------
     # ------ Run on image folder ----
     # -------------------------------
+    """
     folder_names = ["env1_m30_view",
                     "env1_m45_view",
                     "env2_m30_view",
                     "env2_m45_view",
                     "env3_m30_view",
                     "env3_m45_view"]
+    """
+    folder_names = ["/home/ilkerbozcan/repos/uav-indoor-anomaly-detection/test_data/test1",
+                    "/home/ilkerbozcan/repos/uav-indoor-anomaly-detection/test_data/test2",
+                    "/home/ilkerbozcan/repos/uav-indoor-anomaly-detection/test_data/test3",
+                    "/home/ilkerbozcan/repos/uav-indoor-anomaly-detection/test_data/test4"]
 
     for folder_name in folder_names:
         os.mkdir(folder_name+"_out")
-        results = obj.run_on_image_folder(path_to_folder="samples/data/data/"+folder_name,
+        results = obj.run_on_image_folder(path_to_folder=folder_name,
                                             save_dir="./",
                                             display=False,
                                             show_mask=False)
@@ -92,9 +98,9 @@ def main(args):
             filtered_results.append(filtered_predictions)
         # -------------------------------
         print(filtered_results)
-        with open("annotations_"+folder_name+".json", 'w+') as f:
+        with open(folder_name+"/"+"annotations.json", 'w+') as f:
             json.dump(filtered_results, f)
-    """
+    
 
 if __name__=='__main__':
     main(sys.argv)
